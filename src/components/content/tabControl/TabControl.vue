@@ -33,6 +33,8 @@ export default {
   methods: {
     itemClick(index) {
       this.currentIndex = index; //点击时修改index的值
+
+      this.$emit("tabClick", index); //点击切换页面，并传递出index的值
     }
   }
 };

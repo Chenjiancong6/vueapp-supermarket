@@ -7,33 +7,8 @@
     <home-swiper :banners="banners"></home-swiper>
     <recommend-view :recommends="recommends"></recommend-view>
     <feature-view></feature-view>
-    <tab-control :titles="['流行','新款','精选']"></tab-control>
-    <goods-list :goods="goods['pop'].list"></goods-list>
-
-    <div>
-      <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-    </div>
+    <tab-control class="tab-control" :titles="['流行','新款','精选']" @tabClick="tabClick"></tab-control>
+    <goods-list :goods="goods[currentType].list"></goods-list>
   </div>
 </template>
 
@@ -105,6 +80,23 @@ export default {
         this.goods[type].list.push(...newList); //把获取的数据push存放进去
         this.goods[type].page += 1; //数据页面加1
       });
+    },
+
+    /**
+     * 点击切换商品数据
+     */
+    tabClick(index) {
+      switch (index) {
+        case 0:
+          this.currentType = "pop";
+          break;
+        case 1:
+          this.currentType = "new";
+          break;
+        case 2:
+          this.currentType = "sell";
+          break;
+      }
     }
   }
 };
@@ -119,5 +111,12 @@ export default {
 .nav-bar {
   background-color: var(--color-tint);
   color: #fff;
+}
+
+.tab-control {
+  position: sticky; /*粘性布局定位，*/
+  /* 结合了 position:relative 和 position:fixed 两种定位功能于一体的特殊定位  */
+  top: 44px;
+  z-index: 9;
 }
 </style>
