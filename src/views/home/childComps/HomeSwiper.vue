@@ -2,7 +2,7 @@
   <swiper ref="swiper">
     <swiper-item v-for="item in banners">
       <a :href="item.link">
-        <img :src="item.image" />
+        <img :src="item.image" @load="imageLoaded" />
       </a>
     </swiper-item>
   </swiper>
@@ -23,6 +23,22 @@ export default {
       type: Array,
       default() {
         return [];
+      }
+    }
+  },
+  data() {
+    return {
+      isLoaded: false //tabcontroll吸顶效果
+    };
+  },
+
+  methods: {
+    imageLoaded() {
+      //tabcontroll吸顶效果
+      if (!this.isLoaded) {
+        //if判断,图片没加载完为false,加载完为true
+        this.$emit("swiperLoaded");
+        this.isLoaded = true;
       }
     }
   }

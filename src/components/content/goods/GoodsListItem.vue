@@ -1,11 +1,11 @@
 <template>
   <div class="goods-list-item">
-    <img :src="showImage" />
+    <img :src="showImage" @load="imgageLoad" />
     <!-- @load="imageLoad":获取加载图片数量 -->
     <div class="goods-info">
-      <p>{{goodsItem.title}}</p>
-      <span class="price">{{goodsItem.price}}</span>
-      <span class="collect">{{goodsItem.cfav}}</span>
+      <p>{{ goodsItem.title }}</p>
+      <span class="price">{{ goodsItem.price }}</span>
+      <span class="collect">{{ goodsItem.cfav }}</span>
     </div>
   </div>
 </template>
@@ -26,6 +26,13 @@ export default {
       return (
         this.goodsItem.img || this.goodsItem.image || this.goodsItem.show.img
       );
+    }
+  },
+
+  methods: {
+    //使用中央时间总线，传递出加载图片给home.vue
+    imgageLoad() {
+      this.$bus.$emit("itemImageLoad");
     }
   }
 };
