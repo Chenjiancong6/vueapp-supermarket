@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-list-item">
+  <div class="goods-list-item" @click="itemClick">
     <img :src="showImage" @load="imgageLoad" />
     <!-- @load="imageLoad":获取加载图片数量 -->
     <div class="goods-info">
@@ -33,6 +33,18 @@ export default {
     //使用中央时间总线，传递出加载图片给home.vue
     imgageLoad() {
       this.$bus.$emit("itemImageLoad");
+    },
+
+    //点击跳转到详情页
+    itemClick() {
+      //1. 获取对应图片的iid
+      const iid = this.goodsItem.iid;
+
+      //2. 点击跳转到详情页
+      this.$router.push({
+        path: "/detail",
+        query: { iid }
+      });
     }
   }
 };

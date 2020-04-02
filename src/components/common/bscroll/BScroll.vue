@@ -78,4 +78,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.wrapper {
+  overflow: hidden;
+}
+</style>

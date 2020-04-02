@@ -9,6 +9,7 @@ const home = () => import('views/home/Home')
 const category = () => import('views/category/Category')
 const profile = () => import('views/profile/Profile')
 const shopcart = () => import('views/shopcart/Shopcart')
+const detail = () => import("views/detail/Detail");
 
 
 const routes = [{
@@ -47,6 +48,14 @@ const routes = [{
             title: '我的'
         }
 
+    },
+    {
+        path: "/detail",
+        component: detail,
+        name: 'detail',
+        meta: {
+            title: '详情页'
+        }
     }
 ];
 
