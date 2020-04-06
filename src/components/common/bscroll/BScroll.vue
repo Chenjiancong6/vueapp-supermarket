@@ -61,7 +61,7 @@ export default {
 
     //refresh()函数获取加载图片,防卡顿
     refresh() {
-      console.log("--防抖函数测试---");
+      //console.log("--防抖函数测试---");
       this.scroll && this.scroll.refresh();
     },
 

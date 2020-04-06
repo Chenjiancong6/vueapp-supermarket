@@ -61,7 +61,7 @@ const routes = [{
 
 //挂载router路由
 const router = new VueRouter({
-    mode: 'history',
+    mode: 'history', //当 URL 改变时，页面不会重新加载
     base: process.env.BASE_URL,
     routes
 })
