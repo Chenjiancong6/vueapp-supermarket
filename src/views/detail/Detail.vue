@@ -4,7 +4,7 @@
     <div class="name">
       <span class="myname">超级大哈克</span>
     </div>
-    <b-scroll class="content" ref="bscroll" @scroll="contentScroll" :probe-type="3">
+    <b-scroll class="content" ref="bscroll" @scroll="contentScroll" :probe-type="3"> 
       <detail-swiper :top-images="topImages"></detail-swiper>
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shop"></detail-shop-info>
@@ -15,7 +15,7 @@
     </b-scroll>
 
     <back-top @click.native="backTop" v-show="isShowScroll"></back-top>
-    <detail-bottom-bar></detail-bottom-bar>
+    <detail-bottom-bar @addToCart="addToCart"></detail-bottom-bar>
   </div>
 </template>
 
@@ -186,6 +186,20 @@ export default {
           this.$refs.nav.currentindex = this.currentIndex;
         }
       }
+    },
+
+    //将点击加入购物车的商品信息添加到store中
+    addToCart() {
+      const product = {}; //创建一个空对象存储数据
+      product.iid = this.iid; //取出商品id
+      product.imgURL = this.topImages[0];
+      product.title = this.goods.title;
+      product.desc = this.goods.desc;
+      product.price = this.goods.realPrice;
+
+      //把数据发送到action 进行异步处理
+      //product===payload(vuex中的变量参数)
+      this.$store.dispatch("addCart", product);
     }
   }
 };
