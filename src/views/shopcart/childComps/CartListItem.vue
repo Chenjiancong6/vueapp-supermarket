@@ -1,7 +1,12 @@
 <template>
   <div id="cart-list-item">
     <div class="item-selector">
-      <check-button></check-button>
+      <check-button :is-checked="itemInfo.checked" @click.native="checkClick"></check-button>
+      <!-- itemInfo.checked,
+     itemInfo 已经从cartList.vue中获取$store.state.cartList，
+      其中可以获取store的 payload.checked = true;的值，
+      使其变成为true。等于 :is-checked="true"
+      -->
     </div>
     <div class="item-img">
       <img :src="itemInfo.imgURL" alt />
@@ -26,6 +31,12 @@ export default {
   },
   components: {
     CheckButton
+  },
+  methods: {
+    checkClick() {
+      //取反
+      this.itemInfo.checked = !this.itemInfo.checked;
+    }
   }
 };
 </script>

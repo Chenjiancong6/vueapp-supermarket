@@ -31,6 +31,7 @@ const store = new Vuex.Store({
           context.commit("addCounter", oldProduct);
           resolve("商品数量加1");
         } else {
+          payload.checked = true; //选择按钮，默认选中
           context.commit("addToCard", payload); //并把新添加的商品push()加入保存
           resolve("添加新的商品");
         }
