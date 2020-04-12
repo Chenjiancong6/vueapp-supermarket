@@ -3,6 +3,7 @@
     <nav-bar class="nav-bar" ref="navBar">
       <div slot="center">大哈克商城</div>
     </nav-bar>
+
     <tab-control
       ref="contentTab2"
       class="tab-control"

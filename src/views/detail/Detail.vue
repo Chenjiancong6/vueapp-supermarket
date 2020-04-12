@@ -4,7 +4,7 @@
     <div class="name">
       <span class="myname">超级大哈克</span>
     </div>
-    <b-scroll class="content" ref="bscroll" @scroll="contentScroll" :probe-type="3"> 
+    <b-scroll class="content" ref="bscroll" @scroll="contentScroll" :probe-type="3">
       <detail-swiper :top-images="topImages"></detail-swiper>
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shop"></detail-shop-info>
@@ -200,6 +200,8 @@ export default {
       //把数据发送到action 进行异步处理
       //product===payload(vuex中的变量参数)
       this.$store.dispatch("addCart", product);
+
+      this.$toast.show("加入购物车成功！");
     }
   }
 };

@@ -3,7 +3,7 @@
     <check-button class="select-all" :is-checked="isSelect" @click.native="checkBtnClick"></check-button>
     <span>全选</span>
     <span class="total-price">合计:{{totalPrice}}</span>
-    <span class="buy-product">去计算:({{calculation}})</span>
+    <span class="buy-product" @click="calcClick">去计算({{calculation}})</span>
   </div>
 </template>
 
@@ -72,6 +72,14 @@ export default {
         this.$store.state.cartList.forEach(item => {
           item.checked = true;
         });
+      }
+    },
+
+    //提示弹窗
+    calcClick() {
+      this.$toast.show("正在跳转结算哟！");
+      if (!this.isSelect) {
+        this.$toast.show("购物车没有商品！", 3000);
       }
     }
   }
