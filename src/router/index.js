@@ -10,6 +10,8 @@ const category = () => import('views/category/Category')
 const profile = () => import('views/profile/Profile')
 const shopcart = () => import('views/shopcart/Shopcart')
 const detail = () => import("views/detail/Detail");
+const login = () => import("views/login/Login");
+const register = () => import("views/register/Register");
 
 
 const routes = [{
@@ -55,6 +57,22 @@ const routes = [{
         name: 'detail',
         meta: {
             title: '详情页'
+        }
+    },
+    {
+        path: '/login',
+        component: login,
+        name: login,
+        meta: {
+            title: '登录页面'
+        }
+    },
+    {
+        path: '/register',
+        component: register,
+        name: register,
+        meta: {
+            title: '注册页面'
         }
     }
 ];
