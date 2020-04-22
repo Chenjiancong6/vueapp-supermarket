@@ -6,24 +6,46 @@
 
     <form action method="post" id="Register_form">
       <div class="form-group">
-        <label for="email">邮箱</label>
-        <el-input class="el_input" placeholder="请输入邮箱" v-model="email" maxlength="20" clearable></el-input>
-        <!-- <input type="email" name="email" placeholder="输入邮箱" class="from-control" /> -->
+        <label for="email">号码</label>
+        <el-input
+          class="el_input"
+          placeholder="请输入号码"
+          v-model="phone"
+          maxlength="20"
+          clearable
+        ></el-input>
+        <!-- <input type="email" name="email" placeholder="输入号码" class="from-control" /> -->
       </div>
 
       <div class="form-group">
         <label for="text">昵称</label>
-        <el-input class="el_input" placeholder="请输入昵称" v-model="input" maxlength="20"></el-input>
+        <el-input
+          class="el_input"
+          placeholder="请输入昵称"
+          v-model="nickname"
+          maxlength="20"
+        ></el-input>
       </div>
 
       <div class="form-group">
         <label for="passwords">密码</label>
-        <el-input class="el_input" placeholder="请输入密码" v-model="input" maxlength="20" show-password></el-input>
-        <!-- <input type="password" class="from-control" name="password" placeholder="输入密码" /> -->
+        <el-input
+          class="el_input"
+          placeholder="请输入密码"
+          v-model="password"
+          maxlength="20"
+          show-password
+        ></el-input>
       </div>
       <div class="btn_div">
         <el-row>
-          <el-button type="submit" class="btn_Register" size="medium">注册</el-button>
+          <el-button
+            @click="register()"
+            type="submit"
+            class="btn_Register"
+            size="medium"
+            >注册</el-button
+          >
         </el-row>
       </div>
     </form>
@@ -41,15 +63,54 @@ export default {
   name: "Register",
   data() {
     return {
-      input: "",
-      email: ""
+      nickname: "",
+      phone: "",
+      password: "",
     };
   },
   methods: {
     loginClick() {
       this.$router.push("/login");
-    }
-  }
+    },
+    //获取输入框内容
+    register() {
+      //获取表单内容
+      var formData = {
+        phone: this.phone,
+        nickname: this.nickname,
+        password: this.password,
+      };
+      fetch("http://localhost:8888/register", {
+        method: "POST",
+        credentials: "same-origin",
+        "Access-Control-Allow-Credentials": true,
+        "Access-Control-Allow-Origin": "*",
+        headers: new Headers({
+          "Content-type": "application/json",
+        }),
+        mode: "cors",
+        body: JSON.stringify(formData),
+      })
+        .then(function(data) {
+          //then()，res接收后端处理后的数据,并且展示在前端中
+          var err_code = data.err_code;
+          if (err_code === 0) {
+            this.$toast.show("注册成功！");
+            window.alert("哈哈哈");
+          } else if (err_code === 1) {
+            this.$toast.show("号码或昵称已经存在！");
+          } else if (err_code === 500) {
+            this.$toast.show("服务器忙，请稍后再试!");
+          }
+        })
+        .catch(function(err) {
+          //catch()主要处理后端网络请求不成功后的数据返回
+          if (err.status === 404) {
+            this.$toast.show("找不到页面，404");
+          }
+        });
+    },
+  },
 };
 </script>
 

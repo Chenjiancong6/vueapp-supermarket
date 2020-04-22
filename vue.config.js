@@ -12,6 +12,8 @@ module.exports = {
             .set("components", resolve("src/components"))
             .set("views", resolve("src/views"))
             .set("network", resolve("src/network"))
-            .set("common", resolve("src/common"));
+            .set("common", resolve("src/common"))
+            .set('models', resolve('src/models'))
+            .set('server', resolve('server'))
     }
 };

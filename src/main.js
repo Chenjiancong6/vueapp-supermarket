@@ -15,6 +15,7 @@ Vue.config.productionTip = false
 
 Vue.prototype.$bus = new Vue() //创造$bus中央总线原型
 
+
 new Vue({
   router,
   store,

@@ -36,7 +36,7 @@ export default {
   name: "UserInfo",
   data() {
     return {
-      imageUrl: ""
+      imageUrl: "",
     };
   },
   methods: {
@@ -61,8 +61,8 @@ export default {
     },
     registerClick() {
       this.$router.push("/register");
-    }
-  }
+    },
+  },
 };
 </script>
 
