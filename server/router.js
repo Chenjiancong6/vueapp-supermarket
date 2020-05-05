@@ -4,65 +4,7 @@ var router = express.Router(); //express的路由插件
 
 
 
-
-
-/**
- * 登录post请求
- */
-// router.post("/login", async (req, res) => {
-//   const AdminModel = require('./user')
-
-//   const phone = req.body.phone;
-//   const pass = req.body.pass
-//   console.log(req)
-//   if (!phone) {
-//     return res.status(422).send({
-//       msg: "账号不能为空"
-//     })
-//   }
-//   if (!pass) {
-//     return res.status(422).send({
-//       msg: "密码不能为空"
-//     })
-//   }
-//   //1 找用户
-//   const user = await AdminModel.findOne({
-//     phone: phone,
-//   }).select('+password')
-//   //const admin = await AdminModel.findOne({ username: username, })
-//   if (!user) {
-//     return res.status(422).send({
-//       msg: "用户不存在"
-//     })
-//   }
-//   //2 验证
-//   const isValid = (user.password == pass ? true : false)
-//   if (!isValid) {
-//     return res.status(422).send({
-//       msg: "密码错误"
-//     })
-//   }
-//   //3res 给token 
-//   //  const token = jwt.sign({
-//   //    aid: admin._id
-//   //  }, app.get('secret'))
-//   req.session.id = user._id
-//   res.send({
-//     code: '0',
-//     msg: '登录成功',
-//   })
-// });
-
-// router.get("/ss", (req, res, next) => {
-//   var body = req.body;
-//   res.json({
-//     msg: "11",
-//   });
-// });
-
-
-
-router.get('/login/:id', function (req, res) {
+router.get('/login:id', function (req, res) {
   console.log(req.params)
   res.json({
     meg: '857'
@@ -72,7 +14,7 @@ router.get('/login/:id', function (req, res) {
 router.post('/login', function (req, res) {
   // 1. 获取表单数据
   var body = req.body;
-  console.log(req.body)
+  console.log(req.body) //获取数据
   //2. 查询数据库用户名密码是否正确
   User.findOne({
       //查询的内容
@@ -103,11 +45,24 @@ router.post('/login', function (req, res) {
       //如果用户存在，登录成功
       res.status(200).json({
         err_code: 0, // 信息匹配成功
-        message: "登录成功"
+        message: "登录成功",
+        user
       });
     }
   )
 
+})
+
+//base64
+// multer
+//jsonwebtoken  
+router.post("/file/upload", async (req, res, next) => {
+  var file;
+  console.log(req)
+  req.file = file
+  //隐式
+}, async (req, res) => {
+  // req.file //拿到上一个中间件的值
 })
 
 
@@ -118,6 +73,7 @@ router.post('/login', function (req, res) {
 router.post("/register", function (req, res) {
   //1. 获取表单内容 :req.body
   var body = req.body;
+  console.log(req.body) //获取数据
   //2. 查询数据库用户是否存在
   User.findOne({
       $or: [

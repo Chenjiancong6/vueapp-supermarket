@@ -21,7 +21,7 @@ var Scheme = mongoose.Schema;
 
 userSchema = new Scheme({
     //登录账号
-    Phone: {
+    phone: {
         type: String,
         require: true
     },
@@ -34,12 +34,12 @@ userSchema = new Scheme({
     password: {
         type: String,
         require: true,
-        select: false
+        //select: false
     },
     //头像
     avatar: {
         type: String,
-        default: ''
+        default: 'http://192.168.0.104:8888/resource/logo.png'
     },
     //创建时间
     create_time: {

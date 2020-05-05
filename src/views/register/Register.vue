@@ -7,24 +7,13 @@
     <form action method="post" id="Register_form">
       <div class="form-group">
         <label for="email">号码</label>
-        <el-input
-          class="el_input"
-          placeholder="请输入号码"
-          v-model="phone"
-          maxlength="20"
-          clearable
-        ></el-input>
+        <el-input class="el_input" placeholder="请输入号码" v-model="phone" maxlength="20" clearable></el-input>
         <!-- <input type="email" name="email" placeholder="输入号码" class="from-control" /> -->
       </div>
 
       <div class="form-group">
         <label for="text">昵称</label>
-        <el-input
-          class="el_input"
-          placeholder="请输入昵称"
-          v-model="nickname"
-          maxlength="20"
-        ></el-input>
+        <el-input class="el_input" placeholder="请输入昵称" v-model="nickname" maxlength="20"></el-input>
       </div>
 
       <div class="form-group">
@@ -39,13 +28,7 @@
       </div>
       <div class="btn_div">
         <el-row>
-          <el-button
-            @click="register()"
-            type="submit"
-            class="btn_Register"
-            size="medium"
-            >注册</el-button
-          >
+          <el-button @click="register()" type="submit" class="btn_Register" size="medium">注册</el-button>
         </el-row>
       </div>
     </form>
@@ -65,7 +48,7 @@ export default {
     return {
       nickname: "",
       phone: "",
-      password: "",
+      password: ""
     };
   },
   methods: {
@@ -78,7 +61,7 @@ export default {
       var formData = {
         phone: this.phone,
         nickname: this.nickname,
-        password: this.password,
+        password: this.password
       };
       fetch("http://localhost:8888/register", {
         method: "POST",
@@ -86,17 +69,20 @@ export default {
         "Access-Control-Allow-Credentials": true,
         "Access-Control-Allow-Origin": "*",
         headers: new Headers({
-          "Content-type": "application/json",
+          "Content-type": "application/json"
         }),
         mode: "cors",
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
       })
-        .then(function(data) {
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
           //then()，res接收后端处理后的数据,并且展示在前端中
+          const than = this;
           var err_code = data.err_code;
           if (err_code === 0) {
-            this.$toast.show("注册成功！");
-            window.alert("哈哈哈");
+            than.$toast.show("注册成功！");
           } else if (err_code === 1) {
             this.$toast.show("号码或昵称已经存在！");
           } else if (err_code === 500) {
@@ -109,8 +95,8 @@ export default {
             this.$toast.show("找不到页面，404");
           }
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

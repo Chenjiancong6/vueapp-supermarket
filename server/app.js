@@ -10,6 +10,9 @@ var session = require("express-session"); //保持登录状态
 //引用框架
 var app = express();
 
+//1 开放访问静态资源
+app.use("/resource", express.static(path.join(__dirname, "/resource/upload")));
+
 app.use(cors());
 
 //配置post 表单
@@ -36,5 +39,5 @@ app.use(router);
 
 //启动服务
 app.listen(8888, function () {
-  console.log("服务器已经开启，端口是:http://127.0.0.1:8080");
+  console.log("服务器已经开启，端口是:http://127.0.0.1:8888");
 });

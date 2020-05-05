@@ -2,6 +2,7 @@
   <div class="user-info">
     <div class="avatar-all">
       <!-- 饿了么UI头像 -->
+      <!-- http://192.168.0.104:8888/file/upload -->
       <el-upload
         class="avatar-uploader"
         action="https://jsonplaceholder.typicode.com/posts/"
@@ -9,13 +10,14 @@
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
       >
-        <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+        <img v-if="userInfo.avatar" :src="userInfo.avatar" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
     </div>
 
     <div class="info">
-      <div class="login" link="/login">
+      <div v-if="userInfo.nickname">{{userInfo.nickname}}</div>
+      <div class="login" link="/login" v-if="!userInfo.nickname">
         <span @click="loginClick">登录</span>/
         <span @click="registerClick">注册</span>
       </div>
@@ -36,17 +38,22 @@ export default {
   name: "UserInfo",
   data() {
     return {
-      imageUrl: "",
+      userInfo: {
+        avatar: ""
+      }
     };
+    // vuex
   },
   methods: {
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+      // console.log(res, file);
+      this.userInfo.avatar = URL.createObjectURL(file.raw);
     },
+    //1
     beforeAvatarUpload(file) {
+      // console.log(file);
       const isJPG = file.type === "image/jpeg";
       // const isLt2M = file.size / 1024 / 1024 < 2;
-
       if (!isJPG) {
         this.$message.error("上传头像图片只能是 JPG 格式!");
       }
@@ -62,7 +69,19 @@ export default {
     registerClick() {
       this.$router.push("/register");
     },
+    refresh() {
+      //隐式定义,获取头像和用户名
+      this.userInfo.avatar = localStorage.getItem("avatar");
+      // console.log(this.userInfo.avatar);
+      this.userInfo.nickname = sessionStorage.getItem("nickname");
+
+      localStorage.clear(); //刷新时把本地存储清除掉
+      sessionStorage.clear();
+    }
   },
+  created() {
+    this.refresh();
+  }
 };
 </script>
 
