@@ -79,10 +79,10 @@ export default {
         })
         .then(data => {
           //then()，res接收后端处理后的数据,并且展示在前端中
-          const than = this;
+
           var err_code = data.err_code;
           if (err_code === 0) {
-            than.$toast.show("注册成功！");
+            this.$toast.show("注册成功！");
           } else if (err_code === 1) {
             this.$toast.show("号码或昵称已经存在！");
           } else if (err_code === 500) {
