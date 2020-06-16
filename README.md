@@ -1,24 +1,24 @@
-# my--mall
+# my--vueapp-mall
 
-## Project setup
+## 下载后想要打开项目运行，需要在终端进行以下命令行操作
+
+## 项目配置
 
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 编译和热重装以进行开发
 
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 编译并最小化生产
 
 ```
 npm run build
 ```
-
-### Customize configuration
 
 ### 想体验 vueapp 功能和获取后端接口，可以微信上联系我：1293707549
 
